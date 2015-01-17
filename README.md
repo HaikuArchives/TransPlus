@@ -1,4 +1,6 @@
-ReadMe
+
+
+Here is the original ReadMe:
 
 -------Installing-------------------------
 1. Copy TransPlus.so to /boot/beos/system/lib
