@@ -1,4 +1,5 @@
 Original Creator: http://sourceforge.net/projects/transplus/
+License is GLPv2
 
 Here is the original ReadMe:
 
