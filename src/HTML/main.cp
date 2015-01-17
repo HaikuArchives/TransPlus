@@ -1,3 +1,5 @@
+#include <Sound.h>
+#include <InterfaceDefs.h>
 #include <image.h>
 #include <String.h>
 #include <Node.h>

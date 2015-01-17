@@ -1,5 +1,6 @@
 class __declspec(dllexport) TranslatorWP;
 
+#include <Sound.h>
 #include <List.h>
 #include <Message.h>
 #include <String.h>

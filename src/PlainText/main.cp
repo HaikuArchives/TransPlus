@@ -1,3 +1,5 @@
+#include <Sound.h>
+#include <InterfaceDefs.h>
 extern "C" _EXPORT status_t Identify(BPositionIO *inSource,const translation_format *inFormat,
   BMessage *ioExtension,translator_info *outInfo, uint32 outType);
   
