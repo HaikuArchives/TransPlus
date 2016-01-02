@@ -1,3 +1,4 @@
+#include <ClassInfo.h>
 #include <Sound.h>
 #include <InterfaceDefs.h>
 #include <image.h>
@@ -13,7 +14,7 @@
 
 extern "C" _EXPORT status_t Identify(BPositionIO *inSource,const translation_format *inFormat,
   BMessage *ioExtension,translator_info *outInfo, uint32 outType);
-  
+
 extern "C" _EXPORT status_t Translate(BPositionIO *inSource,const translator_info *inInfo,
   BMessage *ioExtension,uint32 outType,BPositionIO *outDestination);
 
@@ -393,7 +394,7 @@ void pushAttrFromTag(TranslatorWP *work,BString tag /*No brackets*/,int32 begin,
 			} else {
 				sscanf(working.String(),"%f",&final_size);
 				final_size += baseTextSize;
-			}		
+			}
 			work->pushAttr(begin,end,size,&final_size,sizeof(float));
 		}
 		if (tag.IFindFirst("COLOR=") != B_ERROR) {
