@@ -324,7 +324,7 @@ void ParseTags(TranslatorWP *work,BString HTML) {
 	size_t size;
 	for (int32 i = 0; (i = HTML.FindFirst('<',i)) != B_ERROR; i++) {
 		size = HTML.FindFirst('>',i) - (i + 1);
-		strncpy(curTag,(char *)((uint32)(HTML.String()) + i + 1),size);
+		strncpy(curTag,(char *)((addr_t)(HTML.String()) + i + 1),size);
 		curTag[size] = 0;
 		string.SetTo(curTag);
 		if (HTML.ByteAt(i+1) == '/')
@@ -340,7 +340,7 @@ void ParseTags(TranslatorWP *work,BString HTML) {
 		temp.Append(">");
 		HTML.Remove(i,HTML.FindFirst('>',i) - i + 1);
 		i--;
-		tempHTML = (char *)((uint32)HTML.String() + i);
+		tempHTML = (char *)((addr_t)HTML.String() + i);
 		for (ending = 0;ending < tempHTML.IFindFirst(temp.String());ending++) {
 			if (tempHTML.ByteAt(ending) == '<') {
 				if (tempHTML.IFindFirst(curTag) == ending + 1) {
