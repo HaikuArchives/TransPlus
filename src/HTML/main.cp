@@ -1,3 +1,4 @@
+#include <ClassInfo.h>
 #include <Sound.h>
 #include <InterfaceDefs.h>
 #include <image.h>
@@ -13,7 +14,7 @@
 
 extern "C" _EXPORT status_t Identify(BPositionIO *inSource,const translation_format *inFormat,
   BMessage *ioExtension,translator_info *outInfo, uint32 outType);
-  
+
 extern "C" _EXPORT status_t Translate(BPositionIO *inSource,const translator_info *inInfo,
   BMessage *ioExtension,uint32 outType,BPositionIO *outDestination);
 
@@ -323,7 +324,7 @@ void ParseTags(TranslatorWP *work,BString HTML) {
 	size_t size;
 	for (int32 i = 0; (i = HTML.FindFirst('<',i)) != B_ERROR; i++) {
 		size = HTML.FindFirst('>',i) - (i + 1);
-		strncpy(curTag,(char *)((uint32)(HTML.String()) + i + 1),size);
+		strncpy(curTag,(char *)((addr_t)(HTML.String()) + i + 1),size);
 		curTag[size] = 0;
 		string.SetTo(curTag);
 		if (HTML.ByteAt(i+1) == '/')
@@ -339,7 +340,7 @@ void ParseTags(TranslatorWP *work,BString HTML) {
 		temp.Append(">");
 		HTML.Remove(i,HTML.FindFirst('>',i) - i + 1);
 		i--;
-		tempHTML = (char *)((uint32)HTML.String() + i);
+		tempHTML = (char *)((addr_t)HTML.String() + i);
 		for (ending = 0;ending < tempHTML.IFindFirst(temp.String());ending++) {
 			if (tempHTML.ByteAt(ending) == '<') {
 				if (tempHTML.IFindFirst(curTag) == ending + 1) {
@@ -393,7 +394,7 @@ void pushAttrFromTag(TranslatorWP *work,BString tag /*No brackets*/,int32 begin,
 			} else {
 				sscanf(working.String(),"%f",&final_size);
 				final_size += baseTextSize;
-			}		
+			}
 			work->pushAttr(begin,end,size,&final_size,sizeof(float));
 		}
 		if (tag.IFindFirst("COLOR=") != B_ERROR) {

@@ -2,6 +2,8 @@
 
 #define _TRANS_WP_H
 
+#include <Picture.h>
+
 enum { //-------------Common text attributes, use in WP_Attr::attr_type-----------
 	font = 'FONT',
 	color = 'COLR',
@@ -37,14 +39,14 @@ class TranslatorWP : public BArchivable { //----------Type Code is 'TRWP'-------
 		WP_Attr *getAttr(int32 *begin, int32 end, int32 index = 0); //-----do NOT deallocate or modify----
 		//-----------Embedded Data--------------------------------------------------
 			void AddEmbedded(uint32 data_type /*--See Translator Groups--*/,int32 offset,const void *data,size_t size);
-			
+
 			status_t GetEmbedded(uint32 *data_type /*--See Translator Groups--*/,int32 offset,const void **data,size_t *size, int32 index = 0);
 			status_t GetEmbedded(uint32 data_type /*--See Translator Groups--*/,int32 offset,const void **data,size_t *size, int32 index = 0);
 				//-------Pictures-------
 			void AddPicture(int32 offset,BPicture *picture); //----Vector-------
 			void AddPicture(int32 offset,BBitmap *bitmap);
 			void AddPicture(int32 offset,const void *translatorBitmap,size_t size);
-			
+
 			BPicture *GetPicture(int32 offset, int32 index = 0); //----Vector-------
 			BBitmap *GetBitmap(int32 offset,int32 index = 0);
 				//-------Text-----------
@@ -61,7 +63,7 @@ class TranslatorWP : public BArchivable { //----------Type Code is 'TRWP'-------
 		//----------Gloabal Attributes----------------------------------------------
 		void pushGlobal(uint32 type,const char *name,const void *data,size_t size);
 		void pushGlobal(const char *data,const char *name);
-		
+
 		const void *getGlobal(int32 index,uint32 type,size_t *size,char **name);
 		const char *getGlobal(int32 index,char **name);
 		const void *getGlobal(const char *name,uint32 type,size_t *size,int32 index = 0);

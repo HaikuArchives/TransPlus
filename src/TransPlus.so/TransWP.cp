@@ -152,19 +152,19 @@ TranslatorWP::TranslatorWP(BMessage *archive) : BArchivable(archive) {
 	for (int32 i = 0; i < count; i++) {
 		archive->FindData("attr",type,i,&buffer,&size);
 		memcpy(&begin,buffer,4);
-		memcpy(&end,(void *)((uint32)buffer + 4),4);
-		memcpy(&attr_type,(void *)((uint32)buffer + 8),4);
-		memcpy(&data_size,(void *)((uint32)buffer + 12),sizeof(size_t));
-		pushAttr(begin,end,attr_type,(void *)((uint32)buffer + 12 + sizeof(size_t)),data_size);
+		memcpy(&end,(void *)((addr_t)buffer + 4),4);
+		memcpy(&attr_type,(void *)((addr_t)buffer + 8),4);
+		memcpy(&data_size,(void *)((addr_t)buffer + 12),sizeof(size_t));
+		pushAttr(begin,end,attr_type,(void *)((addr_t)buffer + 12 + sizeof(size_t)),data_size);
 	}
 	//---------------------------------------
 	archive->GetInfo("embedded",&type,&count);
 	for (int32 i = 0; i < count; i++) {
 		archive->FindData("embedded",type,i,&buffer,&size);
 		memcpy(&begin,buffer,4);
-		memcpy(&attr_type,(void *)((uint32)buffer + 4),4);
-		memcpy(&data_size,(void *)((uint32)buffer + 8),sizeof(size_t));
-		AddEmbedded(attr_type,begin,(void *)((uint32)buffer + 12),data_size);
+		memcpy(&attr_type,(void *)((addr_t)buffer + 4),4);
+		memcpy(&data_size,(void *)((addr_t)buffer + 8),sizeof(size_t));
+		AddEmbedded(attr_type,begin,(void *)((addr_t)buffer + 12),data_size);
 	}
 	archive->FindMessage("global",&globals);
 }
@@ -250,7 +250,7 @@ void TranslatorWP::AddPicture(int32 offset,BBitmap *bitmap) {
 	unsigned char *io = new unsigned char[ganymede.Size()];
 	size_t europa = ganymede.Size();
 	ganymede.ReadAt(0,io,europa);
-	memcpy((void *)(uint32(io) + sizeof(TranslatorBitmap)),bitmap->Bits(),europa - sizeof(TranslatorBitmap));
+	memcpy((void *)(addr_t(io) + sizeof(TranslatorBitmap)),bitmap->Bits(),europa - sizeof(TranslatorBitmap));
 	AddEmbedded(B_TRANSLATOR_BITMAP,offset,io,europa);
 	delete io;
 }
